@@ -5,7 +5,7 @@ form.addEventListener('input', event => {
     email: form.elements['email'].value,
     message: form.elements['message'].value,
   };
-  localStorage.setItem('feedback-form-state', JSON.stringify(objValue));
+  localStorage.setItem('feedback-form-state', JSON.stringify(objValue).trim());
 });
 
 function getValue(form) {
@@ -18,16 +18,19 @@ function getValue(form) {
 }
 getValue(form);
 
+const input = document.querySelector('input');
+const textarea = document.querySelector('textarea');
+
 form.addEventListener('submit', event => {
   event.preventDefault();
-  let objValue = {
-    email: form.elements['email'].value,
-    message: form.elements['message'].value,
-  };
-  console.log(objValue);
-  localStorage.removeItem('feedback-form-state');
-  const input = document.querySelector('input');
-  input.value = '';
-  const textarea = document.querySelector('textarea');
-  textarea.value = '';
+  if (input.value !== '' && textarea.value !== '') {
+    let objValue = {
+      email: form.elements['email'].value,
+      message: form.elements['message'].value,
+    };
+    console.log(objValue);
+    localStorage.removeItem('feedback-form-state');
+    input.value = '';
+    textarea.value = '';
+  }
 });
