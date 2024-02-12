@@ -1,11 +1,10 @@
 const form = document.querySelector('.feedback-form');
 form.addEventListener('input', event => {
-  event.preventDefault();
   let objValue = {
-    email: form.elements['email'].value,
-    message: form.elements['message'].value,
+    email: form.elements['email'].value.trim(),
+    message: form.elements['message'].value.trim(),
   };
-  localStorage.setItem('feedback-form-state', JSON.stringify(objValue).trim());
+  localStorage.setItem('feedback-form-state', JSON.stringify(objValue));
 });
 
 function getValue(form) {
